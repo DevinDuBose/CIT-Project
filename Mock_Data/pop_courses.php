@@ -2,8 +2,7 @@
 
 //include 'C:\wamp\www\CIT_Remote_Monitoring_App\App\Models\db.php';
 include($_SERVER["DOCUMENT_ROOT"] . "/CIT_Remote_Monitoring_App/App/Models/db.php");
-$lines = file("mcl_app_user_student.txt");
-//$lines = file("zsrsinf_cit.txt");
+$lines = file("zsrsecl_cit.txt");
 $db = Database::getDb();
 foreach($lines as $line)
 {
@@ -24,17 +23,28 @@ foreach($lines as $line)
 		
 	}
 
-	$lnum = $output[0];
-	$firstName = $output[2];
-	$lastName = $output[1];
-	$email = end($output);
+	$courseNum = $output[2] . " " . $output[3];
+	$courseName = $output[4];
+	$leadInstructor = $output[5];
 	
-	$query1 = 'SELECT LNumber FROM AppUser WHERE LNumber = :lnum';
+	
+	
+	
+	$query1 = 'SELECT CourseNumber FROM Course WHERE CourseNumber = :coursenum';
 	$statement = $db->prepare($query1);
-	$statement->bindValue(':lnum', $lnum);
+	$statement->bindValue(':coursenum', $courseNum);
 	$statement->execute();
 	$rows = $statement->fetchAll();
 	$statement->closeCursor();
+	
+	$query2 = 'SELECT UserID FROM AppUser WHERE LNumber = :leadinstructor';
+	$statement = $db->prepare($query2);
+	$statement->bindValue(':leadinstructor', $leadInstructor);
+	$statement->execute();
+	$rows2 = $statement->fetch();
+	$statement->closeCursor();
+	$userID = $rows2[0];
+	echo $userID . "<br/>";
 	
 	
 	echo count($rows) . "<br/>";
@@ -42,17 +52,17 @@ foreach($lines as $line)
 	if (count($rows) == 0)
 	{
 	
-		$query2 = 'INSERT INTO AppUser(FirstName, LastName, LNumber, EmailAddress)
-							 VALUES (:firstName, :lastName, :lnum, :email)';
+		$query3 = 'INSERT INTO COURSE(CourseName, CourseNumber, LeadInstructorId)
+							 VALUES (:coursename, :coursenum, :leadinstructor)';
 	
-		$statement = $db->prepare($query2);
-		$statement->bindValue(':firstName', $firstName);
-		$statement->bindValue(':lastName', $lastName);
-		$statement->bindValue(':lnum', $lnum);
-		$statement->bindValue(':email', $email);
+		$statement = $db->prepare($query3);
+		$statement->bindValue(':coursenum', $courseNum);
+		$statement->bindValue(':coursename', $courseName);
+		$statement->bindValue(':leadinstructor', $userID);
 		$statement->execute();
 		$statement->closeCursor();
 	}
+	/*
 	else
 	{
 		if (strpos($email, 'lanecc.edu'))
@@ -67,11 +77,7 @@ foreach($lines as $line)
 		}
 	}
 		
-			
-	
-
-	
-	echo $lnum . "<br />" . $lastName . "<br />" . $firstName . "<br />" . $email . "<br />";
+	*/		
 	
 }
 ?>

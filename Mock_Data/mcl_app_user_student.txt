@@ -1,5 +1,5 @@
 "L00000001"	"Mouse"	"Mickey"	"5555555"	"Permanent phone (Main)"	"mickeymouse@fake.com"
-"L00000001"	"Mouse"	"Mickey"	"5555555"	"Permanent phone (Main)"	"mickeymouse@fake.com"
+"L00000001"	"Mouse"	"Mickey"	"5555555"	"Permanent phone (Main)"	"mickeymouse@fakelanecc.edu"
 "L00000001"	"Mouse"	"Mickey"	"5555555"	"Permanent phone (Main)"	"mickeymouse@fake.com"
 "L00000002"	"Mouse"	"Minnie"	"5555555"	"Permanent phone (Main)"	"minniemouse@fake.com"
 "L00000003"	"Duck"	"Donald"	"5555555"	"Permanent phone (Main)"	"donalduck@fake.com"
@@ -12,3 +12,5 @@
 "L00000010"	"Fish"	"Flounder"	"5555555"	"Permanent phone (Main)"	"flounder@fake.com"
 "L00000003"	"Duck"	"Donald"	"5555555"	"Permanent phone (Main)"	"donalduck@fake.com"
 "L00000015"	"Duck"	"Huey"	"5555555"	"Permanent phone (Main)"	"hueyduck@fake.com"
+"L00000016"	"Duck"	"Huey News"	"5555555"	"Permanent phone (Main)"	"hueyduck@fake.com"
+"L00000017"	"Duck"	"Huey News"	"5555555"	"Permanent phone (Main)"	"hueyducknews@fake.com"
