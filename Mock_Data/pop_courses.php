@@ -123,17 +123,27 @@ foreach($lines as $line)
 		
 }
 
-echo count($studentRegistrationLines) . "<br />";
+$counter = 0;
+//echo $counter . "<br />";
+
+//echo count($studentRegistrationLines) . "<br />";
 foreach ($studentRegistrationLines as $line)
 {
+	if ($counter == 1)
+	{
+		break;
+	}
+		
+		
+	
 	$trim_line = preg_replace('/"\s+"/', '""', $line);
-	echo $trim_line . "<br/>";
+	//echo $trim_line . "<br/>";
 	$parts = explode('""', $trim_line);
 	$output = array();
 	foreach ($parts as $part)
 	{
 		$trim_part = preg_replace('/"/', '', $part);
-		echo $trim_part . "<br />";
+		//echo $trim_part . "<br />";
 			
 		if ( $trim_part != "")
 		{
@@ -143,16 +153,19 @@ foreach ($studentRegistrationLines as $line)
 	}
 	$lnum = $output[0];
 	$sectionNum = $output[1];
+	echo $sectionNum . "<br />";
 	
-	$query5 = 'SELECT UserID FROM AppUser WHERE LNumber = :lnum';
+	$query5 = 'SELECT student.UserID FROM student 
+					inner join Appuser 
+					on appuser.UserId = student.UserId 
+					WHERE appuser.LNumber = :lnum';
 	$statement = $db->prepare($query5);
 	$statement->bindValue(':lnum', $lnum);
 	$statement->execute();
 	$rows = $statement->fetch();
 	$statement->closeCursor();
 	$userID = $rows[0];
-	//$second = $rows[1];
-	echo $userID . "<br />" . count($rows) . "<br />" .  "<br />";
+	echo $userID . "<br />" .  "<br />";
 	
 	$query6 = 'INSERT INTO studentregistration (SectionNumber, UserID)
 							VALUES(:sectionnum, :userid)';
@@ -161,7 +174,7 @@ foreach ($studentRegistrationLines as $line)
 	$statement->bindValue(':userid', $userID);
 	$statement->execute();
 	$statement->closeCursor();
-	
+	/*
 	$query7 = 'SELECT * FROM studentregistration';
 	$statement = $db->prepare($query7);
 	$statement->execute();
@@ -174,8 +187,11 @@ foreach ($studentRegistrationLines as $line)
 		echo $row[0] . "<br />" . $row[1] . "<br />";
 	
 	}
-		
+	*/
+	
 	//echo $sectionNum . "<br />" . $userID . "<br />";
+	//$counter ++;
+	//echo $counter . "<br />";
 	
 }
 
