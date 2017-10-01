@@ -2,8 +2,8 @@
 
 //include 'C:\wamp\www\CIT_Remote_Monitoring_App\App\Models\db.php';
 include($_SERVER["DOCUMENT_ROOT"] . "/CIT_Remote_Monitoring_App/App/Models/db.php");
-$lines = file("zsrsecl_cit.txt");
-$studentRegistrationLines = file("zsrslst_cit.txt");
+$lines = file("C:\wamp64\www\CIT_Remote_Monitoring_App\Mock_Data\LIVE\zsrsecl_cit.txt");
+$studentRegistrationLines = file("C:\wamp64\www\CIT_Remote_Monitoring_App\Mock_Data\LIVE\zsrslst_cit.txt");
 $db = Database::getDb();
 
 $insert1 = 'INSERT INTO Term (TermID, TermName) Values (0,"Summer")';
@@ -52,10 +52,12 @@ foreach($lines as $line)
 	$startDate = $output[9];
 	$termID = 0;
 	
-	$dateParts = explode('-', $startDate);
-	$month = $dateParts[1];
-	$year = $dateParts[2];
-	echo $month . " " . $year . '<br />';
+	if ($startDate != 'N/A') {
+		$dateParts = explode('-', $startDate);
+		$month = $dateParts[1];
+		$year = $dateParts[2];
+		echo $month . " " . $year . '<br />';
+	}
 	
 	
 	
@@ -106,6 +108,8 @@ foreach($lines as $line)
 		case "APR":
 			$termID = 3;
 			break;
+		case "DEFAULT":
+			$termID = -1;
 	}
 	
 	$query4 = 'INSERT INTO section (CourseNumber, SectionNumber, TermId, UserID, Year) 

@@ -2,8 +2,8 @@
 
 //include 'C:\wamp\www\CIT_Remote_Monitoring_App\App\Models\db.php';
 include($_SERVER["DOCUMENT_ROOT"] . "/CIT_Remote_Monitoring_App/App/Models/db.php");
-$instructorLines = file("mcl_app_user_instructor.txt");
-$studentLines = file("mcl_app_user_student.txt");
+$instructorLines = file("C:\wamp64\www\CIT_Remote_Monitoring_App\Mock_Data\LIVE\zsriinf_cit.txt");
+$studentLines = file("C:\wamp64\www\CIT_Remote_Monitoring_App\Mock_Data\LIVE\zsrsinf_cit.txt");
 //$lines = file("zsrsinf_cit.txt");
 $db = Database::getDb();
 $insert1 = 'INSERT INTO Major (MajorName) Values ("CIT")';
