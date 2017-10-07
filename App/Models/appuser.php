@@ -75,8 +75,7 @@ class AppUser
 
     public static function login($LNUMBER, $PASSWORD, $ROLE)
     {
-	  $PASSWORD = strtoupper(hash('SHA256', $PASSWORD));
-	  
+
       $_SESSION['role'] = $ROLE;
       if ($ROLE == "faculty") {
           return null;
@@ -99,10 +98,7 @@ class AppUser
       else
       {
         $user = StudentDB::StudentLogin($LNUMBER, $PASSWORD);
-			  $my_file = 'test.txt';
-			  $handle = fopen($my_file, 'w') or die('Cannot open file:  '.$my_file);
-			  fwrite($handle, json_encode($user));
-			  
+
         if ($user !== null && isset($user)) {
             // ----------- COURSES -----------  //
             $courses = StudentDB::GetStudentCourses($user);
@@ -129,6 +125,6 @@ class AppUser
 
       $_SESSION['user'] = null;
       return null;
-    }
+     }
 }
 ?>
